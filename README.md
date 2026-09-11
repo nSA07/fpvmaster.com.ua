@@ -1,46 +1,38 @@
-# Astro Starter Kit: Basics
+Архітектура та структура проекту (Astro 5+)
+1. Концепція Роутингу (Routing)
+В Astro роутинг будується автоматично на основі структури папки src/pages/:
 
-```sh
-pnpm create astro@latest -- --template basics
-```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+/ (src/pages/index.astro) — Головна сторінка: баннери, блоки з головними категоріями та сітками найпопулярніших товарів.
+/catalog (src/pages/catalog/index.astro) — Загальний каталог: перелік усіх категорій магазину.
+/catalog/[category] (src/pages/catalog/[category].astro) — Сторінка конкретної категорії: показує товари, що належать тільки до вибраної категорії.
+/product/[id] (src/pages/product/[id].astro) — Сторінка товару: детальна картка товару з кнопкою «Купити».
+2. Файлова структура проекту
+src/
+├── components/          # Компоненти інтерфейсу
+│   ├── common/          # Загальні елементи
+│   │   ├── Header.astro # Шапка сайту з навігацією
+│   │   ├── Footer.astro # Підвал сайту
+│   │   └── Nav.astro    # Меню навігації по категоріях
+│   ├── catalog/         # Компоненти для каталогу
+│   │   ├── CategoryCard.astro
+│   │   └── CategorySection.astro
+│   └── product/         # Компоненти для товарів
+│       ├── ProductCard.astro
+│       └── ProductGrid.astro
+│
+├── layouts/             # Шаблони сторінок
+│   └── BaseLayout.astro # Базовий HTML-шаблон (із Header та Footer)
+│
+├── pages/               # Динамічні та статичні сторінки (Routes)
+│   ├── index.astro                 # Головна сторінка
+│   ├── catalog/
+│   │   ├── index.astro             # Всі категорії
+│   │   └── [category].astro        # Товари категорії (динамічний роут)
+│   └── product/
+│       └── [id].astro              # Детальна сторінка товару (динамічний роут)
+│
+├── styles/              # Глобальні стилі
+│   └── global.css       # Імпорт Tailwind / бази
+│
+└── types/               # TypeScript типи (для товарів, категорій)
+    └── index.ts

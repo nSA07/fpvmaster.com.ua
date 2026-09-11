@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import "../styles/global.css";
+---
+
+<Layout title="404 — Сторінку не знайдено | Fpv Master">
+  <div class="container mx-auto flex items-center justify-center">
+    <div class="max-w-md w-full border border-neutral-300 bg-white p-8 rounded-lg text-center">
+      <span class="text-xs font-mono font-semibold text-neutral-400 uppercase">Помилка 404</span>
+      <h1 class="text-2xl font-bold text-neutral-900 mt-2 mb-4 tracking-tight">Сторінку не знайдено</h1>
+      <p class="text-xs text-neutral-600 mb-6 font-mono">
+        Запитаний URL відсутній у базі даних або був переміщений.
+      </p>
+      <a 
+        href="/" 
+        class="inline-block w-full py-2 px-4 bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-mono uppercase tracking-wider rounded transition"
+      >
+        Повернутися до каталогу
+      </a>
+    </div>
+  </div>
+</Layout>

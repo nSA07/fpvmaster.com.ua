@@ -1,0 +1,54 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-neutral-900 text-neutral-300 mt-auto border-t border-neutral-800">
+  <div class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+      <!-- Колонка 1: Про магазин -->
+      <div class="space-y-4 md:col-span-1">
+        <a href="/" class="text-xl font-bold tracking-tight text-white">
+          MY<span class="text-indigo-500">STORE</span>
+        </a>
+        <p class="text-sm text-neutral-400">
+          Сучасний інтернет-магазин із якісними товарами та швидкою доставкою по всій Україні.
+        </p>
+      </div>
+
+      <!-- Колонка 2: Покупцям -->
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Покупцям</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/catalog" class="hover:text-white transition">Каталог товарів</a></li>
+          <li><a href="/delivery" class="hover:text-white transition">Доставка та оплата</a></li>
+          <li><a href="/returns" class="hover:text-white transition">Обмін та повернення</a></li>
+        </ul>
+      </div>
+
+      <!-- Колонка 3: Інформація -->
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Компанія</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/about" class="hover:text-white transition">Про нас</a></li>
+          <li><a href="/contacts" class="hover:text-white transition">Контакти</a></li>
+          <li><a href="/privacy" class="hover:text-white transition">Політика конфіденційності</a></li>
+        </ul>
+      </div>
+
+      <!-- Колонка 4: Контакти -->
+      <div class="space-y-2 text-sm">
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Контакти</h3>
+        <p class="text-neutral-400">Телефон: <a href="tel:+380000000000" class="text-white hover:underline">+38 (000) 000-00-00</a></p>
+        <p class="text-neutral-400">Email: <a href="mailto:info@mystore.com" class="text-white hover:underline">info@mystore.com</a></p>
+        <p class="text-neutral-400">Графік: Пн-Нд 09:00 - 20:00</p>
+      </div>
+
+    </div>
+
+    <!-- Нижня плашка -->
+    <div class="border-t border-neutral-800 mt-12 pt-6 text-center text-xs text-neutral-500">
+      <p>© {currentYear} MYSTORE. Всі права захищені.</p>
+    </div>
+  </div>
+</footer>

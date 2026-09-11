@@ -1,0 +1,64 @@
+---
+// Тут надалі можна зафетчити категорії з Directus SDK
+const categories = [
+  { name: 'Каталог', slug: '/catalog' },
+  { name: 'Новинки', slug: '/catalog/new' },
+  { name: 'Акції', slug: '/catalog/sales' },
+];
+---
+
+<header class="sticky top-0 z-50 bg-white border-b border-neutral-200">
+  <div class="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
+    
+    <!-- Логотип -->
+    <a href="/" class="text-xl font-bold tracking-tight text-neutral-900 hover:text-neutral-700 transition">
+      MY<span class="text-indigo-600">STORE</span>
+    </a>
+
+    <!-- Десктопна навігація -->
+    <nav class="hidden md:flex items-center gap-6">
+      {categories.map((item) => (
+        <a 
+          href={item.slug} 
+          class="text-sm font-medium text-neutral-600 hover:text-indigo-600 transition-colors"
+        >
+          {item.name}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Пошук та Іконки дій -->
+    <div class="flex items-center gap-4">
+      
+      <!-- Пошуковий рядок (десктоп) -->
+      <div class="relative hidden sm:block w-48 lg:w-64">
+        <input 
+          type="search" 
+          placeholder="Пошук товарів..." 
+          class="w-full bg-neutral-100 text-sm rounded-full py-2 pl-4 pr-9 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition"
+        />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+
+      <!-- Кабінет покупця -->
+      <a href="/profile" class="p-2 text-neutral-600 hover:text-neutral-900 rounded-full hover:bg-neutral-100 transition" title="Кабінет">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      </a>
+
+      <!-- Кошик (заготовка під React-острів / Nanostores) -->
+      <a href="/cart" class="relative p-2 text-neutral-600 hover:text-neutral-900 rounded-full hover:bg-neutral-100 transition" title="Кошик">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+        </svg>
+        <span class="absolute top-1 right-1 bg-indigo-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
+          0
+        </span>
+      </a>
+
+    </div>
+  </div>
+</header>
