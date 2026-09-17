@@ -3,34 +3,49 @@ import { getCategoryTree } from "@/services/categories";
 import { Navigation } from "./Navigation";
 import { Search } from "./Search";
 import { UserActions } from "./UserActions";
+import { Image } from 'astro:assets';
+import { BottomNav } from "./BottomNav";
 
 const categories = await getCategoryTree();
 
 const staticNav = [
   { name: 'Головна', href: '/' },
   { name: 'Акції', href: '/sales', badge: 'HOT' },
-  { name: 'Про нас', href: '/about' },
-  { name: 'Блог', href: '/blog' },
   { name: 'Контакти', href: '/contacts' },
 ];
 ---
 
-<header class="sticky top-0 z-50 bg-white border-b border-neutral-200 shadow-sm">
-  <div class="container mx-auto max-w-7xl px-4 h-16 flex items-center justify-between gap-2">
+<header class="sticky top-0 z-50 bg-white border-b border-neutral-200">
+  <div class="container mx-auto max-w-7xl px-4 h-12 sm:h-14 flex items-center justify-between gap-2">
     
-    <a
-      href="/"
-      class="text-xl font-black tracking-tight text-neutral-900 hover:text-neutral-700 transition shrink-0"
+    <a 
+      href="/" 
+      class="flex items-center gap-3 text-neutral-900 hover:text-neutral-700 transition shrink-0 group"
     >
-      MY<span class="text-neutral-500">STORE</span>
+      <Image 
+        src="/logo.png" 
+        alt="FPV Master Logo" 
+        width={32} 
+        height={32} 
+        class="w-8 h-8 shrink-0" 
+      />
+
+      <div class="h-7 w-[1px] bg-neutral-700 shrink-0 hidden sm:block"></div>
+
+      <span class="font-logo text-2xl font-bold tracking-tight uppercase hidden sm:flex items-center gap-1">
+        <span class="text-[#67BAF4]">FPV</span>
+        <span class="text-black font-semibold">Master</span>
+      </span>
     </a>
     
     <Navigation client:load categories={categories} staticNav={staticNav} />
 
     <div class="flex items-center gap-3 shrink-0">
-      <Search client:load />
-      <UserActions client:load cartCount={0} />
+      <Search client:only="react" />
+      <UserActions client:load />
     </div>
 
   </div>
 </header>
+
+<BottomNav categories={categories} staticNav={staticNav} client:only="react" />
