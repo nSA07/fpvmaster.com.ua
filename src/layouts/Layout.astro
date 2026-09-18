@@ -1,6 +1,6 @@
 ---
-import Header from '@/components/common/Header/Header.astro';
-import Footer from '../components/common/Footer.astro';
+import Footer from '@/components/Footer.astro';
+import Header from '@/components/Header/Header.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -11,20 +11,19 @@ const { title = "Fpv Master" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="uk">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/logo.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
 	<body class="flex flex-col min-h-screen antialiased">
 		<Header/>
-			<main class="flex-1">
-				<slot />
-			</main>
+		<main class="flex-1">
+			<slot />
+		</main>
 		<Footer/>
   </body>
 </html>

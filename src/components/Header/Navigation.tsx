@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, ChevronRight, ChevronDown, ArrowRight } from 'lucide-react';
+import { Menu, ChevronRight, ArrowRight } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -37,9 +37,10 @@ export const Navigation: React.FC<NavigationProps> = ({ categories, staticNav })
     <NavigationMenu className="hidden lg:flex flex-1 justify-center">
       <NavigationMenuList className="gap-1">
         
-        {/* Випадаюче меню "Категорії" */}
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="font-normal text-sm h-9 px-4 gap-2">
+          <NavigationMenuTrigger 
+            className="font-normal hover:bg-neutral-200 focus:bg-neutral-200 data-popup-open:bg-neutral-200 data-popup-open:hover:bg-neutral-200 data-open:bg-neutral-200 data-open:hover:bg-neutral-200 data-open:focus:bg-neutral-200 text-sm h-9 px-2 gap-1 transition-colors"
+          >
             <Menu className="h-4 w-4" />
             Категорії
           </NavigationMenuTrigger>
@@ -47,7 +48,7 @@ export const Navigation: React.FC<NavigationProps> = ({ categories, staticNav })
           <NavigationMenuContent>
             <div className="w-[750px] h-[400px] p-2 flex bg-white rounded-xl shadow-xl border border-neutral-100">
               
-              {/* Ліва панель (Категорії 1-го рівня) */}
+              {/* Ліва колонка (Головні категорії) */}
               <div className="w-[240px] shrink-0 border-r border-neutral-100 pr-2 space-y-0.5 overflow-y-auto">
                 {categories.map((cat) => (
                   <div
@@ -55,8 +56,8 @@ export const Navigation: React.FC<NavigationProps> = ({ categories, staticNav })
                     onMouseEnter={() => setActiveCat(cat)}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer ${
                       activeCat?.slug === cat.slug
-                        ? 'bg-neutral-100 font-medium text-neutral-900'
-                        : 'text-neutral-600 hover:bg-neutral-50 font-normal'
+                        ? 'bg-neutral-200 font-medium text-neutral-900'
+                        : 'text-neutral-600 hover:bg-neutral-200 font-normal'
                     }`}
                   >
                     <a href={`/catalog/${cat.slug}`} className="truncate flex-1">
@@ -69,7 +70,7 @@ export const Navigation: React.FC<NavigationProps> = ({ categories, staticNav })
                 ))}
               </div>
 
-              {/* Права панель (Підкатегорії 2-го і 3-го рівня) */}
+              {/* Права колонка (Підкатегорії) */}
               <div className="flex-1 p-4 overflow-y-auto">
                 {activeCat ? (
                   <div>
@@ -87,18 +88,18 @@ export const Navigation: React.FC<NavigationProps> = ({ categories, staticNav })
                           <div key={subCat.id || subCat.slug} className="space-y-1.5">
                             <a
                               href={`/catalog/${subCat.slug}`}
-                              className="text-sm font-medium text-neutral-800 hover:text-black block leading-tight"
+                              className="text-sm font-medium text-neutral-800 hover:bg-neutral-200 rounded px-1.5 py-0.5 -mx-1.5 block leading-tight transition-colors"
                             >
                               {subCat.name_category}
                             </a>
 
                             {subCat.children && subCat.children.length > 0 && (
-                              <div className="space-y-1 pl-0.5">
+                              <div className="space-y-0.5">
                                 {subCat.children.map((subSubCat) => (
                                   <a
                                     key={subSubCat.id || subSubCat.slug}
                                     href={`/catalog/${subSubCat.slug}`}
-                                    className="text-xs font-normal text-neutral-500 hover:text-neutral-900 block truncate"
+                                    className="text-xs font-normal text-neutral-500 hover:text-neutral-900 hover:bg-neutral-200 rounded px-1.5 py-0.5 -mx-1.5 block truncate transition-colors"
                                   >
                                     {subSubCat.name_category}
                                   </a>
@@ -126,7 +127,7 @@ export const Navigation: React.FC<NavigationProps> = ({ categories, staticNav })
         {/* Статичні посилання */}
         {staticNav.map((item) => (
           <NavigationMenuItem key={item.href}>
-            <a href={item.href} className={`${navigationMenuTriggerStyle()} font-normal text-neutral-600 hover:text-neutral-900 h-9 px-3.5 gap-1.5`}>
+            <a href={item.href} className={`${navigationMenuTriggerStyle()} font-normal hover:bg-neutral-200 focus:bg-neutral-200 text-neutral-600 hover:text-neutral-900 h-9 px-2 gap-1 transition-colors`}>
               {item.name}
               {item.badge && (
                 <Badge variant="secondary" className="bg-zinc-800 text-white hover:bg-zinc-800 text-[9px] font-medium px-1.5 py-0 uppercase tracking-wider rounded-full">

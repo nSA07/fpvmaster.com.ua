@@ -4,23 +4,23 @@ import { Navigation } from "./Navigation";
 import { Search } from "./Search";
 import { UserActions } from "./UserActions";
 import { Image } from 'astro:assets';
-import { BottomNav } from "./BottomNav";
+import { BottomNav } from "../BottomNav/BottomNav";
 
 const categories = await getCategoryTree();
 
 const staticNav = [
-  { name: 'Головна', href: '/' },
-  { name: 'Акції', href: '/sales', badge: 'HOT' },
+  { name: 'Доставка та оплата', href: '/dostavka-i-oplata' },
+  { name: 'Знижки', href: '/sales', badge: 'HOT' },
   { name: 'Контакти', href: '/contacts' },
 ];
 ---
 
 <header class="sticky top-0 z-50 bg-white border-b border-neutral-200">
-  <div class="container mx-auto max-w-7xl px-4 h-12 sm:h-14 flex items-center justify-between gap-2">
+  <div class="container mx-auto max-w-7xl px-2 h-12 sm:h-14 flex items-center justify-between gap-2 sm:gap-1">
     
     <a 
       href="/" 
-      class="flex items-center gap-3 text-neutral-900 hover:text-neutral-700 transition shrink-0 group"
+      class="flex items-center gap-1 text-neutral-900 hover:text-neutral-700 transition shrink-0 group"
     >
       <Image 
         src="/logo.png" 
@@ -40,9 +40,11 @@ const staticNav = [
     
     <Navigation client:load categories={categories} staticNav={staticNav} />
 
-    <div class="flex items-center gap-3 shrink-0">
+    <div class="flex items-center justify-end w-full sm:w-auto flex-1 lg:flex-none min-w-0 gap-2">
       <Search client:only="react" />
-      <UserActions client:load />
+      <div class="hidden lg:flex items-center">
+        <UserActions client:load />
+      </div>
     </div>
 
   </div>

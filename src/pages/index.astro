@@ -1,28 +1,14 @@
 ---
+import type { Category, Product } from '@/types/types';
 import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
 
-interface Category {
-  id: string;
-  title: string;
-  slug: string;
-  parent: string | null;
-}
-
-interface Product {
-  id: string;
-  title: string;
-  price: number;
-  sku: string;
-  category_id: string;
-  image?: string | null; // Поле для зображення з Directus
-}
 
 const mockCategories: Category[] = [
-  { id: 'cat-1', title: 'Готові FPV Дрони', slug: 'drones', parent: null },
-  { id: 'cat-2', title: 'Комплектуючі', slug: 'components', parent: null },
-  { id: 'cat-3', title: 'Мотори', slug: 'motors', parent: 'cat-2' },
-  { id: 'cat-4', title: 'Рами', slug: 'frames', parent: 'cat-2' },
+  { id: 'cat-1', name_category: 'Готові FPV Дрони', code_category: 'drones', slug: 'drones', parent_id: null },
+  { id: 'cat-2', name_category: 'Комплектуючі', code_category: 'components', slug: 'components', parent_id: null },
+  { id: 'cat-3', name_category: 'Мотори', code_category: 'motors', slug: 'motors', parent_id: 'cat-2' },
+  { id: 'cat-4', name_category: 'Рами', code_category: 'frames', slug: 'frames', parent_id: 'cat-2' },
 ];
 
 const mockProducts: Product[] = [
@@ -33,19 +19,19 @@ const mockProducts: Product[] = [
   { id: 'p5', title: 'Рама Mark5 DC Frame Kit', price: 3100, sku: 'FRM-MK5', category_id: 'cat-4', image: null },
 ];
 
-const rootCategories = mockCategories.filter(c => c.parent === null);
+const rootCategories = mockCategories.filter(c => c.parent_id === null);
 
-function getSubcategories(parentId: string) {
-  return mockCategories.filter(c => c.parent === parentId);
+function getSubcategories(parentId: string | number) {
+  return mockCategories.filter(c => c.parent_id === parentId);
 }
 
-function getProductsForCategory(catId: string) {
+function getProductsForCategory(catId: string | number) {
   return mockProducts.filter(p => p.category_id === catId);
 }
 ---
 
 <Layout title="Каталог товарів | Fpv Master">
-  <div class="container mx-auto max-w-6xl px-4 py-8">
+  <div class="container mx-auto max-w-7xl px-2 py-8">
     
     <!-- Шапка каталогу -->
     <header class="border-b border-neutral-300 pb-4 mb-8 flex justify-between items-end">
@@ -70,7 +56,7 @@ function getProductsForCategory(catId: string) {
             <div class="border-b border-neutral-200 pb-3 mb-6 flex justify-between items-center">
               <h2 class="text-xl font-bold text-neutral-900 tracking-tight">
                 <a href={`/catalog/${rootCat.slug}`} class="hover:text-indigo-600 transition">
-                  {rootCat.title}
+                  {rootCat.name_category}
                 </a>
               </h2>
               <a href={`/catalog/${rootCat.slug}`} class="text-xs font-semibold uppercase text-neutral-500 hover:text-neutral-900">
@@ -122,7 +108,7 @@ function getProductsForCategory(catId: string) {
                     <div class="pl-4 border-l-2 border-neutral-200">
                       <h3 class="text-sm font-bold text-neutral-700 uppercase tracking-wider mb-3">
                         <a href={`/catalog/${subCat.slug}`} class="hover:text-indigo-600">
-                          ↳ {subCat.title}
+                          ↳ {subCat.name_category}
                         </a>
                       </h3>
 

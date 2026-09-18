@@ -22,19 +22,19 @@ export const Search: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
-  // Запобігаємо розходженням при SSR та чекаємо маунтингу на клієнті
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Скелетон під час SSR/завантаження
   if (!mounted) {
     return (
       <button
         type="button"
-        className="flex items-center justify-center sm:justify-start gap-2 bg-neutral-100 text-neutral-500 text-sm p-2.5 sm:py-2 sm:px-3.5 rounded-full border border-transparent shrink-0"
+        className="flex items-center justify-start gap-2 bg-neutral-200 text-neutral-500 text-sm font-normal py-2 px-2 rounded-full border border-transparent cursor-pointer w-full sm:w-[45%] lg:w-64 min-w-0"
       >
         <SearchIcon className="h-4 w-4 text-neutral-500 shrink-0" />
-        <span className="truncate hidden sm:inline sm:w-36 md:w-48 text-left">
+        <span className="truncate text-left flex-1">
           Пошук товарів...
         </span>
       </button>
@@ -43,37 +43,35 @@ export const Search: React.FC = () => {
 
   return (
     <>
-      {/* Кнопка виклику */}
+      {/* Адаптивна кнопка пошуку */}
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex items-center justify-center sm:justify-start gap-2 bg-neutral-100 hover:bg-neutral-200/80 text-neutral-500 hover:text-neutral-800 text-sm font-normal p-2.5 sm:py-2 sm:px-3.5 rounded-full transition border border-transparent shrink-0 cursor-pointer"
+        className="flex items-center justify-start gap-2 bg-neutral-200 hover:bg-neutral-300/80 text-neutral-500 hover:text-neutral-800 text-sm font-normal py-2 px-2 rounded-full transition border border-transparent cursor-pointer w-full sm:w-[45%] lg:w-64 min-w-0"
         aria-label="Пошук товарів"
       >
         <SearchIcon className="h-4 w-4 text-neutral-500 shrink-0" />
-        <span className="truncate hidden sm:inline sm:w-36 md:w-48 text-left">
+        <span className="truncate text-left flex-1">
           Пошук товарів...
         </span>
       </button>
 
-      {/* 1. ДЕСКТОП: CommandDialog */}
+      {/* 1. ДЕСКТОП: CommandDialog (без зайвої обгортки <Command>) */}
       {isDesktop ? (
         <CommandDialog open={open} onOpenChange={setOpen}>
-            <Command>
-            <CommandInput placeholder="Що ви шукаєте? (напр. SpeedyBee, Mark5...)" />
-            <CommandList className="p-2">
-              <CommandEmpty>Нічого не знайдено.</CommandEmpty>
-              <CommandGroup heading="Часто шукають">
-                <CommandItem onSelect={() => setOpen(false)}>SpeedyBee F405 V4</CommandItem>
-                <CommandItem onSelect={() => setOpen(false)}>GEPRC Mark5 Frame</CommandItem>
-                <CommandItem onSelect={() => setOpen(false)}>ELRS Receiver 868MHz</CommandItem>
-                <CommandItem onSelect={() => setOpen(false)}>Emax Eco II 2207</CommandItem>
-              </CommandGroup>
-            </CommandList>
-          </Command>
+          <CommandInput placeholder="Що ви шукаєте? (напр. SpeedyBee, Mark5...)" />
+          <CommandList className="p-2">
+            <CommandEmpty>Нічого не знайдено.</CommandEmpty>
+            <CommandGroup heading="Часто шукають">
+              <CommandItem onSelect={() => setOpen(false)}>SpeedyBee F405 V4</CommandItem>
+              <CommandItem onSelect={() => setOpen(false)}>GEPRC Mark5 Frame</CommandItem>
+              <CommandItem onSelect={() => setOpen(false)}>ELRS Receiver 868MHz</CommandItem>
+              <CommandItem onSelect={() => setOpen(false)}>Emax Eco II 2207</CommandItem>
+            </CommandGroup>
+          </CommandList>
         </CommandDialog>
       ) : (
-        /* 2. МОБІЛКА / ПЛАНШЕТ: Drawer з обгорткою <Command> */
+        /* 2. МОБІЛКА / ПЛАНШЕТ: Drawer */
         <Drawer open={open} onOpenChange={setOpen}>
           <DrawerContent className="h-[96vh] max-h-[96vh] flex flex-col">
             <div className="mx-auto my-3 h-1.5 w-12 shrink-0 rounded-full bg-neutral-300" />
@@ -83,7 +81,6 @@ export const Search: React.FC = () => {
             </DrawerHeader>
 
             <div className="flex-1 overflow-y-auto p-4">
-              {/* Обгортаємо в Command, щоб cmdk не видавав помилку subscribe */}
               <Command className="rounded-lg border shadow-none">
                 <CommandInput placeholder="Пошук моторів, стеків, рам..." />
                 <CommandList className="p-2">

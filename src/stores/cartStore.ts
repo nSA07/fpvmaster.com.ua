@@ -1,12 +1,7 @@
-// src/stores/cartStore.ts
+import type { CartState } from '@/types/types';
 import { create } from 'zustand';
 
-interface CartState {
-  itemsCount: number;
-  addItem: () => void;
-  removeItem: () => void;
-  setCount: (count: number) => void;
-}
+
 
 export const useCartStore = create<CartState>((set) => ({
   itemsCount: 0,

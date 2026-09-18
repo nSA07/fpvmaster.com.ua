@@ -9,7 +9,7 @@ export const UserActions: React.FC = () => {
     <div className="hidden items-center gap-1 shrink-0 lg:flex">
       <a 
         href="/profile" 
-        className="p-2.5 text-neutral-600 hover:text-neutral-900 rounded-full hover:bg-neutral-100 transition" 
+        className="p-2 text-neutral-600 hover:text-neutral-900 rounded-full hover:bg-neutral-200 transition" 
         title="Особистий кабінет"
       >
         <User className="h-5 w-5" />
@@ -17,7 +17,7 @@ export const UserActions: React.FC = () => {
 
       <a 
         href="/cart" 
-        className="relative p-2.5 text-neutral-600 hover:text-neutral-900 rounded-full hover:bg-neutral-100 transition" 
+        className="relative p-2 text-neutral-600 hover:text-neutral-900 rounded-full hover:bg-neutral-200 transition" 
         title="Кошик"
       >
         <ShoppingBag className="h-5 w-5" />
