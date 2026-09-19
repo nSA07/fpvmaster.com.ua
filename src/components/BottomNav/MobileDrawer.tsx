@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Drawer,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
@@ -13,7 +14,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   title,
   headerAction,
   children,
-  heightClass = "h-[92vh] max-h-[92vh]"
+  footer,
+  heightClass = "h-[93vh] max-h-[93vh]"
 }) => {
   return (
     <Drawer open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -37,7 +39,11 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
         <div className="flex-1 overflow-y-auto min-h-0">
           {children}
         </div>
-
+        {footer && (
+          <DrawerFooter className="border-t border-neutral-100 p-4 shrink-0 bg-white">
+            {footer}
+          </DrawerFooter>
+        )}
       </DrawerContent>
     </Drawer>
   );

@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
-import { ChevronRight, ArrowLeft, ArrowRight, SquareArrowOutUpRight } from 'lucide-react';
-import type { CatalogDrawerContentProps, Category } from '@/types/types';
+import React from 'react';
+import { ChevronRight, ArrowLeft } from 'lucide-react';
+import type { Category } from '@/types/types';
 
+interface CatalogDrawerContentProps {
+  categories: Category[];
+  selectedCat: Category | null;
+  setSelectedCat: (cat: Category | null) => void;
+}
 
-export const CatalogDrawerContent: React.FC<CatalogDrawerContentProps> = ({ categories }) => {
-  const [selectedCat, setSelectedCat] = useState<Category | null>(null);
-
+export const CatalogDrawerContent: React.FC<CatalogDrawerContentProps> = ({
+  categories,
+  selectedCat,
+  setSelectedCat,
+}) => {
+  // 1. Якщо категорія НЕ вибрана — показуємо список головних категорій
   if (!selectedCat) {
     return (
-      <div className="space-y-1">
+      <div className="p-4 space-y-1">
         {categories.map((cat) => (
           <div
             key={cat.id || cat.slug}
@@ -19,7 +27,7 @@ export const CatalogDrawerContent: React.FC<CatalogDrawerContentProps> = ({ cate
                 window.location.href = `/catalog/${cat.slug}`;
               }
             }}
-            className="flex items-center justify-between p-3.5 rounded-xl hover:bg-neutral-100 transition cursor-pointer text-neutral-800 text-sm font-medium border border-transparent hover:border-neutral-200"
+            className="flex items-center justify-between p-3.5 rounded-xl hover:bg-neutral-100 transition cursor-pointer text-neutral-800 text-sm font-medium"
           >
             <span>{cat.name_category}</span>
             {cat.children && cat.children.length > 0 && (
@@ -31,8 +39,10 @@ export const CatalogDrawerContent: React.FC<CatalogDrawerContentProps> = ({ cate
     );
   }
 
+  // 2. Якщо категорія ВЕБРАНА — показуємо підкатегорії + кнопку "Назад"
   return (
-    <div className="space-y-1 px-2">
+    <div className="p-4 space-y-3">
+      {/* Кнопка повернення до списку всіх категорій */}
       <button 
         type="button"
         onClick={() => setSelectedCat(null)} 
@@ -42,24 +52,16 @@ export const CatalogDrawerContent: React.FC<CatalogDrawerContentProps> = ({ cate
         <span>Назад</span>
       </button>
 
-      <a
-        href={`/catalog/${selectedCat.slug}`}
-        className="flex items-center gap-2 text-sm font-medium text-neutral-600 hover:text-black py-1 cursor-pointer border-b border-b-neutral-300"
-      >
-        <span>Усі товари {selectedCat.name_category}</span>
-        <ArrowRight className="h-4 w-4" />
-      </a>
-
+      {/* Список підкатегорій */}
       {selectedCat.children && selectedCat.children.length > 0 && (
-        <div className="space-y-1 pt-2">
+        <div className="space-y-3 pt-2">
           {selectedCat.children.map((subCat) => (
             <div key={subCat.id || subCat.slug} className="space-y-1.5">
               <a
                 href={`/catalog/${subCat.slug}`}
-                className="flex items-center justify-between text-sm font-bold text-neutral-900 hover:text-zinc-600 px-1"
+                className="text-sm font-bold text-neutral-900 hover:text-zinc-600 block px-1"
               >
                 {subCat.name_category}
-                <SquareArrowOutUpRight className="h-4 w-4 text-neutral-500" />
               </a>
 
               {subCat.children && subCat.children.length > 0 && (

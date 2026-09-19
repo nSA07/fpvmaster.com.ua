@@ -54,6 +54,7 @@ export interface MobileDrawerProps {
   headerAction?: React.ReactNode;
   children: React.ReactNode;
   heightClass?: string;
+  footer?: React.ReactNode;
 }
 
 export interface CatalogDrawerContentProps {
