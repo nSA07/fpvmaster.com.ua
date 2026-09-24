@@ -74,15 +74,14 @@ export const Search: React.FC = () => {
           isOpen={open}
           onClose={() => setOpen(false)}
           title="Пошук товарів"
-          heightClass="h-[90vh] max-h-[90vh]"
         >
           <div className="p-2">
-            <Command className="rounded-xl border border-neutral-200 shadow-none overflow-hidden">
+            <Command className="overflow-hidden p-0">
               <CommandInput 
                 placeholder="Пошук моторів, стеків, рам..." 
                 autoFocus
               />
-              <CommandList className="p-2">
+              <CommandList>
                 <CommandEmpty className="py-6 text-center text-sm text-neutral-500">
                   Нічого не знайдено.
                 </CommandEmpty>

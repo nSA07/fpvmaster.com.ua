@@ -8,12 +8,12 @@ interface MoreDrawerContentProps {
 
 export const MoreDrawerContent: React.FC<MoreDrawerContentProps> = ({ staticNav }) => {
     return (
-        <div className="space-y-1">
+        <div className="p-2 flex flex-col">
             {staticNav.map((route) => (
                 <a
                     key={route.href}
                     href={route.href}
-                    className="flex items-center justify-between p-3.5 rounded-xl hover:bg-neutral-100 transition text-neutral-800 text-sm font-medium"
+                    className="flex p-3 items-center justify-between border-b border-neutral-200 text-neutral-800 text-sm font-medium"
                 >
                 <span>{route.name}</span>
                 {route.badge && (

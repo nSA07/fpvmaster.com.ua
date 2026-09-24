@@ -9,13 +9,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Badge } from "@/components/ui/badge";
-
-interface Category {
-  id: string | number;
-  slug: string;
-  name_category: string;
-  children?: Category[];
-}
+import type { Category } from '@/types/types';
 
 interface StaticItem {
   name: string;
