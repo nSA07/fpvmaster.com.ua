@@ -1,12 +1,15 @@
-import React from 'react';
-import type { StaticNavRoute } from '@/types/types';
 import { Badge } from '../ui/badge';
 
-interface MoreDrawerContentProps {
-  staticNav: StaticNavRoute[];
-}
+const staticNav = [
+  { name: 'Доставка та оплата', href: '/dostavka-i-oplata' },
+  { name: 'Знижки', href: '/sales', badge: 'HOT' },
+  { name: 'Повернення товару', href: '/return-policy' },
+  { name: 'Політика конфіденційності', href: '/privacy-policy' },
+  { name: 'Публічна оферта', href: '/public-offer' },
+  { name: 'Контакти', href: '/contacts' },
+];
 
-export const MoreDrawerContent: React.FC<MoreDrawerContentProps> = ({ staticNav }) => {
+export const MoreDrawerContent = () => {
     return (
         <div className="p-2 flex flex-col">
             {staticNav.map((route) => (

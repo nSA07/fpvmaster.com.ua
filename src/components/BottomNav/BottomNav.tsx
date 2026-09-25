@@ -8,8 +8,7 @@ import type { BottomNavProps, Category } from '@/types/types';
 import { Button, buttonVariants } from '../ui/button';
 
 export const BottomNav: React.FC<BottomNavProps> = ({ 
-  categories = [], 
-  staticNav = [] 
+  categories = []
 }) => {
   const [openDrawer, setOpenDrawer] = useState<'none' | 'catalog' | 'more'>('none');
   const itemsCount = useCartStore((state) => state.itemsCount);
@@ -38,7 +37,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     <>
       {/* Плаваюча розширена панель з підписами */}
       <div className="lg:hidden fixed bottom-3 left-0 right-0 z-50 px-3 pointer-events-none pb-safe">
-        <nav className="pointer-events-auto max-w-[390px] mx-auto bg-white/90 backdrop-blur-xl border border-neutral-200/80 shadow-lg shadow-neutral-900/10 rounded-full p-1">
+        <nav className="pointer-events-auto max-w-[390px] mx-auto bg-white/95 backdrop-blur-md border border-neutral-300 shadow-xl shadow-black/15 rounded-full p-1">
           <div className="grid grid-cols-5 h-[52px] items-center">
             
             {/* 1. Головна */}
@@ -47,12 +46,12 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               aria-label="Головна"
               className={`flex flex-col items-center justify-center transition-all rounded-full h-full py-1 ${
                 isHomeActive 
-                  ? 'text-[#67BAF4] bg-[#67BAF4]/15 font-medium' 
-                  : 'text-neutral-500 hover:text-black'
+                  ? 'text-[#67BAF4] bg-[#67BAF4]/15 font-semibold' 
+                  : 'text-black hover:opacity-75'
               }`}
             >
               <Home className="h-[18px] w-[18px]" />
-              <span className="text-[10px] leading-none mt-1">Головна</span>
+              <span className="text-[10px] leading-none mt-1 font-medium">Головна</span>
             </a>
 
             {/* 2. Каталог */}
@@ -62,12 +61,12 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               aria-label="Каталог"
               className={`flex flex-col items-center justify-center transition-all cursor-pointer rounded-full h-full py-1 ${
                 isCatalogActive 
-                  ? 'text-[#67BAF4] bg-[#67BAF4]/15 font-medium' 
-                  : 'text-neutral-500 hover:text-black'
+                  ? 'text-[#67BAF4] bg-[#67BAF4]/15 font-semibold' 
+                  : 'text-black hover:opacity-75'
               }`}
             >
               <LayoutGrid className="h-[18px] w-[18px]" />
-              <span className="text-[10px] leading-none mt-1">Каталог</span>
+              <span className="text-[10px] leading-none mt-1 font-medium">Каталог</span>
             </button>
 
             {/* 3. Кабінет */}
@@ -76,12 +75,12 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               aria-label="Особистий кабінет"
               className={`flex flex-col items-center justify-center transition-all rounded-full h-full py-1 ${
                 isProfileActive 
-                  ? 'text-[#67BAF4] bg-[#67BAF4]/15 font-medium' 
-                  : 'text-neutral-500 hover:text-black'
+                  ? 'text-[#67BAF4] bg-[#67BAF4]/15 font-semibold' 
+                  : 'text-black hover:opacity-75'
               }`}
             >
               <User className="h-[18px] w-[18px]" />
-              <span className="text-[10px] leading-none mt-1">Кабінет</span>
+              <span className="text-[10px] leading-none mt-1 font-medium">Кабінет</span>
             </a>
 
             {/* 4. Кошик */}
@@ -90,8 +89,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               aria-label="Кошик"
               className={`relative flex flex-col items-center justify-center transition-all rounded-full h-full py-1 ${
                 isCartActive 
-                  ? 'text-[#67BAF4] bg-[#67BAF4]/15 font-medium' 
-                  : 'text-neutral-500 hover:text-black'
+                  ? 'text-[#67BAF4] bg-[#67BAF4]/15 font-semibold' 
+                  : 'text-black hover:opacity-75'
               }`}
             >
               <div className="relative">
@@ -102,7 +101,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   </span>
                 )}
               </div>
-              <span className="text-[10px] leading-none mt-1">Кошик</span>
+              <span className="text-[10px] leading-none mt-1 font-medium">Кошик</span>
             </a>
 
             {/* 5. Ще */}
@@ -112,12 +111,12 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               aria-label="Ще"
               className={`flex flex-col items-center justify-center transition-all cursor-pointer rounded-full h-full py-1 ${
                 isMoreActive 
-                  ? 'text-[#67BAF4] bg-[#67BAF4]/15 font-medium' 
-                  : 'text-neutral-500 hover:text-black'
+                  ? 'text-[#67BAF4] bg-[#67BAF4]/15 font-semibold' 
+                  : 'text-black hover:opacity-75'
               }`}
             >
               <MoreHorizontal className="h-[18px] w-[18px]" />
-              <span className="text-[10px] leading-none mt-1">Ще</span>
+              <span className="text-[10px] leading-none mt-1 font-medium">Ще</span>
             </button>
 
           </div>
@@ -134,6 +133,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 w-full">
             <Button
               variant="outline"
+              size="sm"
               onClick={() => setSelectedCat(null)}
               className="w-full p-4 sm:w-auto shrink-0 justify-center"
             >
@@ -145,11 +145,11 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               onClick={handleClose}
               className={buttonVariants({ 
                 variant: "default", 
-                size: "default", 
+                size: "sm", 
                 className: "w-full sm:flex-1 justify-between p-4 gap-2 text-wrap" 
               })}
             >
-              <span className="truncate">Усі {selectedCat.name_category}</span>
+              <span className="truncate text-sm">Усі {selectedCat.name_category}</span>
               <ArrowUpRight className="h-4 w-4 shrink-0" />
             </a>
           </div>
@@ -169,7 +169,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
         onClose={() => setOpenDrawer('none')}
         title="Меню та інформація"
       >
-        <MoreDrawerContent staticNav={staticNav} />
+        <MoreDrawerContent />
       </MobileDrawer>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Search as SearchIcon } from 'lucide-react';
 import { useMediaQuery } from '@/hooks/use-media-query';
 
@@ -15,27 +15,7 @@ import { MobileDrawer } from '../BottomNav/MobileDrawer';
 
 export const Search: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 1024px)");
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Скелетон під час SSR / завантаження
-  if (!mounted) {
-    return (
-      <button
-        type="button"
-        className="flex items-center justify-start gap-2 bg-neutral-200 text-neutral-500 text-sm font-normal py-2 px-3 rounded-full border border-transparent cursor-pointer w-full sm:w-[45%] lg:w-64 min-w-0"
-      >
-        <SearchIcon className="h-4 w-4 text-neutral-500 shrink-0" />
-        <span className="truncate text-left flex-1">
-          Пошук товарів...
-        </span>
-      </button>
-    );
-  }
 
   return (
     <>

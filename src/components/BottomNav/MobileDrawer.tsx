@@ -15,7 +15,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   headerAction,
   children,
   footer,
-  heightClass = "h-[93vh] max-h-[93vh]"
+  heightClass = "h-[92vh] max-h-[92vh]"
 }) => {
   return (
     <Drawer open={isOpen} onOpenChange={(open) => !open && onClose()}>
