@@ -1,8 +1,6 @@
 ---
 import type { Category, Product } from '@/types/types';
 import Layout from '../layouts/Layout.astro';
-import "../styles/global.css";
-
 
 const mockCategories: Category[] = [
   { id: 'cat-1', name_category: 'Готові FPV Дрони', code_category: 'drones', slug: 'drones', parent_id: null },
@@ -32,17 +30,6 @@ function getProductsForCategory(catId: string | number) {
 
 <Layout title="Каталог товарів | Fpv Master">
   <div class="container mx-auto max-w-7xl px-2 py-8">
-    
-    <!-- Шапка каталогу -->
-    <header class="border-b border-neutral-300 pb-4 mb-8 flex justify-between items-end">
-      <div>
-        <h1 class="text-3xl font-bold uppercase tracking-tight text-neutral-900">Каталог товарів</h1>
-        <p class="text-xs text-neutral-500 font-mono mt-1">Оновлено: {new Date().toLocaleDateString('uk-UA')}</p>
-      </div>
-      <div class="text-xs text-neutral-500 font-mono">
-        Всього категорій: {mockCategories.length} | Товарів: {mockProducts.length}
-      </div>
-    </header>
 
     <!-- Перелік категорій -->
     <div class="space-y-12">

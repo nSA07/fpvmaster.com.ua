@@ -39,22 +39,25 @@ export const CatalogDrawerContent: React.FC<CatalogDrawerContentProps> = ({
   }
 
   return (
-    <div className="p-2 flex flex-col">
-      {selectedCat.children && selectedCat.children.length > 0 && (
-        <div className="flex flex-col">
-          {selectedCat.children.map((subCat) => (
-            <div key={subCat.id || subCat.slug} className="flex p-3 items-center justify-between border-b border-neutral-200 text-neutral-800 text-sm font-medium">
-              <a
-                href={`/catalog/${subCat.slug}`}
-                className="flex items-center justify-between w-full"
-              >
-                {subCat.name_category}
-                <ArrowUpRight className="h-4 w-4 text-neutral-400" />
-              </a>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+  <div className="p-2 flex flex-col">
+    {selectedCat.children && selectedCat.children.length > 0 && (
+      <ul className="flex flex-col">
+        {selectedCat.children.map((subCat) => (
+          <li 
+            key={subCat.id || subCat.slug} 
+            className="flex p-3 items-center justify-between border-b border-neutral-200 text-neutral-800 text-sm font-medium"
+          >
+            <a
+              href={`/catalog/${subCat.slug}`}
+              className="flex items-center justify-between w-full"
+            >
+              {subCat.name_category}
+              <ArrowUpRight className="h-4 w-4 text-neutral-400" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
   );
 };

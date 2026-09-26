@@ -18,7 +18,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   heightClass = "h-[92vh] max-h-[92vh]"
 }) => {
   return (
-    <Drawer open={isOpen} onOpenChange={(open) => !open && onClose()}>
+    <Drawer open={isOpen} onOpenChange={(open) => !open && onClose()} >
       <DrawerContent className={`${heightClass} flex flex-col rounded-t-[28px]`}>
         
         <div className="mx-auto mt-2 mb-1 h-1.5 w-12 shrink-0 rounded-full bg-neutral-300" />

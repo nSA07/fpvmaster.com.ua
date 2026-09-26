@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, ChevronRight, ArrowRight } from 'lucide-react';
+import { Menu, ChevronRight, ArrowUpRight } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -40,10 +40,10 @@ export const Navigation: React.FC<NavigationProps> = ({ categories, staticNav })
           </NavigationMenuTrigger>
 
           <NavigationMenuContent>
-            <div className="w-[750px] h-[400px] p-2 flex bg-white rounded-xl shadow-xl border border-neutral-100">
+            <div className="w-[700px] h-[400px] flex bg-white rounded-xl">
               
               {/* Ліва колонка (Головні категорії) */}
-              <div className="w-[240px] shrink-0 border-r border-neutral-100 pr-2 space-y-0.5 overflow-y-auto">
+              <div className="w-[40%] h-full shrink-0 border-r border-neutral-200 pr-2 space-y-0.5 overflow-y-auto">
                 {categories.map((cat) => (
                   <div
                     key={cat.id || cat.slug}
@@ -57,49 +57,38 @@ export const Navigation: React.FC<NavigationProps> = ({ categories, staticNav })
                     <a href={`/catalog/${cat.slug}`} className="truncate flex-1">
                       {cat.name_category}
                     </a>
-                    {cat.children && cat.children.length > 0 && (
+                    {cat.children && cat.children.length > 0 ? (
                       <ChevronRight className="h-4 w-4 shrink-0 text-neutral-400 ml-2" />
-                    )}
+                    ) : 
+                      <ArrowUpRight className="h-4 w-4 shrink-0 text-neutral-400 ml-2" />
+                    }
                   </div>
                 ))}
               </div>
 
               {/* Права колонка (Підкатегорії) */}
-              <div className="flex-1 p-4 overflow-y-auto">
+              <div className="flex-1 p-2 overflow-y-auto">
                 {activeCat ? (
-                  <div>
+                  <div className="flex flex-col">
                     <a
                       href={`/catalog/${activeCat.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-400 hover:text-neutral-900 uppercase tracking-wider mb-4 pb-2 border-b border-neutral-100 transition-colors w-full"
+                      className="inline-flex items-center justify-between gap-1.5 text-xs font-medium text-neutral-400 hover:text-neutral-900 uppercase tracking-wider mb-4 p-2 border-b border-neutral-200 transition-colors w-full"
                     >
                       <span>Усі товари категорії {activeCat.name_category}</span>
-                      <ArrowRight className="h-3.5 w-3.5" />
+                      <ArrowUpRight className="h-4 w-4" />
                     </a>
 
                     {activeCat.children && activeCat.children.length > 0 ? (
-                      <div className="grid grid-cols-2 gap-x-6 gap-y-5">
+                      <div className="flex flex-col gap-1">
                         {activeCat.children.map((subCat) => (
-                          <div key={subCat.id || subCat.slug} className="space-y-1.5">
+                          <div key={subCat.id || subCat.slug} className="flex p-2 items-center hover:bg-neutral-200 rounded-lg justify-between text-neutral-800 text-sm font-medium">
                             <a
                               href={`/catalog/${subCat.slug}`}
-                              className="text-sm font-medium text-neutral-800 hover:bg-neutral-200 rounded px-1.5 py-0.5 -mx-1.5 block leading-tight transition-colors"
+                              className=""
                             >
                               {subCat.name_category}
                             </a>
-
-                            {subCat.children && subCat.children.length > 0 && (
-                              <div className="space-y-0.5">
-                                {subCat.children.map((subSubCat) => (
-                                  <a
-                                    key={subSubCat.id || subSubCat.slug}
-                                    href={`/catalog/${subSubCat.slug}`}
-                                    className="text-xs font-normal text-neutral-500 hover:text-neutral-900 hover:bg-neutral-200 rounded px-1.5 py-0.5 -mx-1.5 block truncate transition-colors"
-                                  >
-                                    {subSubCat.name_category}
-                                  </a>
-                                ))}
-                              </div>
-                            )}
+                            <ArrowUpRight className="h-4 w-4 text-neutral-400" />
                           </div>
                         ))}
                       </div>
